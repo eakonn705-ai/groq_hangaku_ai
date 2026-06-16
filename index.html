@@ -24,15 +24,27 @@
 
     html, body {
       height: 100%;
-      background: var(--bg);
+      background: var(--bg) url('back.png') center/cover fixed no-repeat;
       color: var(--text);
       font-family: 'Noto Sans JP', sans-serif;
       font-size: 15px;
       line-height: 1.7;
     }
 
+    /* 背景画像の上に重ねる暗幕（可読性確保） */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(13,13,15,.86) 0%, rgba(20,20,24,.78) 50%, rgba(10,10,12,.9) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
     /* ── Layout ── */
     .app {
+      position: relative;
+      z-index: 1;
       display: grid;
       grid-template-rows: auto 1fr auto;
       height: 100vh;
@@ -44,6 +56,9 @@
     header {
       padding: 18px 28px 14px;
       border-bottom: 1px solid var(--border);
+      background: rgba(20,20,24,.55);
+      backdrop-filter: blur(14px) saturate(140%);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
       display: flex;
       align-items: baseline;
       gap: 14px;
@@ -138,7 +153,9 @@
     }
 
     .msg-text {
-      background: var(--user-bg);
+      background: rgba(30,30,38,.72);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       border-radius: 4px;
       padding: 12px 16px;
       font-size: .92rem;
@@ -149,7 +166,7 @@
     }
 
     .msg.ai .msg-text {
-      background: var(--ai-bg);
+      background: rgba(22,22,25,.7);
       border-color: #222228;
     }
 
@@ -199,7 +216,9 @@
     .input-area {
       padding: 16px 28px 20px;
       border-top: 1px solid var(--border);
-      background: var(--surface);
+      background: rgba(20,20,24,.62);
+      backdrop-filter: blur(14px) saturate(140%);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
     }
 
     .input-row {
@@ -210,7 +229,7 @@
 
     textarea {
       flex: 1;
-      background: var(--bg);
+      background: rgba(13,13,15,.75);
       border: 1px solid var(--border);
       border-radius: 4px;
       padding: 11px 14px;
@@ -325,7 +344,7 @@
 
 <script>
   // ── APIキーをここに貼り付けてください ──────────────────
-  const apiKey = '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';
+  const apiKey = 'YOUR_GROQ_API_KEY_HERE';
   // ────────────────────────────────────────────────────────
 
   // ── システムプロンプト ────────────────────────────────────
